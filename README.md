@@ -12,9 +12,13 @@ A url shortener using the CRC32 hashing algorithm and the following tech stack:
 
 This app isn't production ready:
 
-- it only works on localhost
+- it only works on localhost (short urls are relative)
 - test coverage is low
-- ...
+- CRC32 hash collisions silently overwrite existing urls (`save()` upserts)
+- unknown keys return 500 instead of 404
+- long urls aren't validated (e.g. urls without a scheme redirect within the app)
+- MongoDB in k8s has no volume, so data is lost on restart
+- no health checks or resource limits in k8s
 
 ## local development
 
